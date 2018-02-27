@@ -3,7 +3,7 @@
  * Replace <...> with your actual data.
  * <Daniel Diamont>
  * <d28977>
- * <15455.>
+ * <15455>
  * Slip days used: <0>
  * Git URL:
  * Spring 2018

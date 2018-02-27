@@ -1,3 +1,15 @@
+/* WORD LADDER DFS_Runnable.java
+ * EE422C Project 3 submission by
+ * Replace <...> with your actual data.
+ * <Daniel Diamont>
+ * <d28977>
+ * <15455>
+ * Slip days used: <0>
+ * Git URL:
+ * Spring 2018
+ */
+
+
 package assignment3;
 
 import java.util.ArrayList;
