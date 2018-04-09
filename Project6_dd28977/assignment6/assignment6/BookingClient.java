@@ -1,6 +1,16 @@
+/* MULTITHREADING <BookingClient.java>
+ * EE422C Project 6 submission by
+ * <Daniel Diamont>
+ * <dd28977>
+ * <15455>
+ * Slip days used: <0>
+ * Spring 2018
+ */
+
 // Insert header here
 package assignment6;
 
+import java.util.List;
 import java.util.Map;
 import java.lang.Thread;
 
@@ -21,6 +31,7 @@ public class BookingClient {
    *         should have as many threads as there are box offices
    */
 	public List<Thread> simulate() {
+		return null;
 		//TODO: Implement this method
 	}
 }
