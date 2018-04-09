@@ -24,7 +24,6 @@ public class Seat {
 		String string = new String();
 		
 		string += String.valueOf(Character.toChars(0x41 + this.rowNum)) + this.seatNum; //0x32 is ASCII offset to 'A'
-		
 		return string;
 	}
 

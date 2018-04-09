@@ -59,10 +59,8 @@ public class Theater {
 		
 		if(numSeatsAssigned == totalNumSeats) {
 			return null;
-		}
-		
+		}		
 		return seat_queue.peek();
-	
 	}
 
 	/*
