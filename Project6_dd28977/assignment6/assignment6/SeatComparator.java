@@ -11,6 +11,8 @@ package assignment6;
 
 import java.util.Comparator;
 
+import assignment6.Theater.Seat;
+
 /**
  * This is a helper class to build a priority queue of seats
  * @author Daniel Diamont

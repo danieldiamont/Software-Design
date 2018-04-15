@@ -51,7 +51,7 @@ public class Theater {
 		
 		//create the seats for the show
 		for(int i = 0; i < numRows; i++) {
-			for(int j = 0; j < seatsPerRow; j++) {
+			for(int j = 1; j <= seatsPerRow; j++) {
 				seat_list.add(new Seat(i,j));
 			}
 		}
@@ -121,5 +121,115 @@ public class Theater {
 			return true;
 		else
 			return false;
+	}
+
+	static public class Seat {
+	
+		private int rowNum;
+		private int seatNum;
+
+		public Seat(int rowNum, int seatNum) {
+			this.rowNum = rowNum;
+			this.seatNum = seatNum;
+		}
+
+		/*
+		 * GETTERS AND SETTERS
+		 */
+		public int getSeatNum() {
+			return seatNum;
+		}
+
+		public int getRowNum() {
+			return rowNum;
+		}
+
+		/**
+		 * toString method
+		 * 
+		 * @return string holds the converted rowNumber into alphabetized representation
+		 * 
+		 * e.g.:
+		 * 
+		 * 0  -> A
+		 * 26 -> AA
+		 * 27 -> AB
+		 * .
+		 * .
+		 * .
+		 * 
+		 */
+		@Override
+		public String toString() {
+			String string = new String();
+
+			string += rowString(this.rowNum) + this.seatNum; //0x41 is the ASCII offset to 'A'
+			return string;
+		}
+		
+		/*
+		 * Recursive helper function for toString method
+		 */
+		public String rowString(int num) {
+			if(num < 0) {
+				return "";
+			}
+			else {
+				return rowString((num / 26) - 1) + (char)(0x41 + num % 26);
+			}
+		}
+
+	}
+
+	static public class Ticket {
+	
+		private String show;
+		private String boxOfficeId;
+		private Seat seat;
+		private int client;
+
+		public Ticket(String show, String boxOfficeId, Seat seat, int client) {
+			this.show = show;
+			this.boxOfficeId = boxOfficeId;
+			this.seat = seat;
+			this.client = client;
+		}
+
+		/*
+		 * GETTERS
+		 */
+		public Seat getSeat() {
+			return seat;
+		}
+
+		public String getShow() {
+			return show;
+		}
+
+		public String getBoxOfficeId() {
+			return boxOfficeId;
+		}
+
+		public int getClient() {
+			return client;
+		}
+
+		/**
+		 * @return out is a string containing the text display of a ticket in the movie theater
+		 */
+		@Override
+		public String toString() { 
+			String out = new String();
+			out += "-------------------------------\n";
+			out +="| Show: " + this.show + "\n|\n";
+			out +="| Box Office ID: " + this.boxOfficeId + "\n|\n";
+			out +="| Seat: " + this.seat + "\n|\n";
+			out +="| Client: " + this.client + "\n|\n";		
+			out +="-------------------------------\n";
+			
+			return out;
+			
+		}
+
 	}
 }

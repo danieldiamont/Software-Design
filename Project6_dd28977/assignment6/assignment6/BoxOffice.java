@@ -12,6 +12,8 @@ package assignment6;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import assignment6.Theater.Seat;
+
 /**
  * This class represents a box office (a Runnable) that attempts to match its
  * clients to the best possible seat available.
