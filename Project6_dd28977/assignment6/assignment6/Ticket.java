@@ -31,9 +31,17 @@ public class Ticket {
 	}
 
 	@Override
-	public String toString() {
-		return boxOfficeId;
-		// TODO: Implement this method to return a string that resembles a ticket
+	public String toString() { 
+		String out = new String();
+		out += "-------------------------------\n";
+		out +="| Show: " + this.show + "\n|\n";
+		out +="| Box Office ID: " + this.boxOfficeId + "\n|\n";
+		out +="| Seat: " + this.seat + "\n|\n";
+		out +="| Client: " + this.client + "\n|\n";		
+		out +="-------------------------------\n";
+		
+		return out;
+		
 	}
 
 }

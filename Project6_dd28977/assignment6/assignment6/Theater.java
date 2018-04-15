@@ -11,7 +11,13 @@ package assignment6;
 
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 
 public class Theater {
@@ -20,7 +26,8 @@ public class Theater {
 	private int seatsPerRow;
 	private int totalNumSeats;
 	private String show;
-	PriorityQueue<Seat> seat_queue = new PriorityQueue<Seat>(new SeatComparator());
+	
+	PriorityQueue<Seat> seat_queue;
 	List<Ticket> ticket_queue = new ArrayList<Ticket>();
 	private int numSeatsAssigned;
 
@@ -44,8 +51,14 @@ public class Theater {
 		//create the seats for the show
 		for(int i = 0; i < numRows; i++) {
 			for(int j = 0; j < seatsPerRow; j++) {
-				seat_queue.add(new Seat(i,j));
+				seat_list.add(new Seat(i,j));
 			}
+		}
+		
+		seat_queue = new PriorityQueue<Seat>(totalNumSeats, new SeatComparator());
+		
+		for(Seat seat : seat_list) {
+			seat_queue.add(seat);
 		}
 		
 	}
@@ -55,12 +68,12 @@ public class Theater {
 	 *
  	 * @return the best seat or null if theater is full
    */
-	public Seat bestAvailableSeat() {
+	public synchronized Seat bestAvailableSeat() {
 		
-		if(numSeatsAssigned == totalNumSeats) {
-			return null;
-		}		
-		return seat_queue.peek();
+		if(seat_queue.size() > 0) {
+			return seat_queue.poll();
+		}
+		else return null;
 	}
 
 	/*
@@ -70,9 +83,14 @@ public class Theater {
    * @param seat a particular seat in the theater
    * @return a ticket or null if a box office failed to reserve the seat
    */
-	public Ticket printTicket(String boxOfficeId, Seat seat, int client) {
-		return null;
-		//TODO: Implement this method
+	public synchronized Ticket printTicket(String boxOfficeId, Seat seat, int client) {
+		Ticket ticket = new Ticket(show,boxOfficeId,seat,client);
+		
+		numSeatsAssigned = numSeatsAssigned + 1;
+		ticket_queue.add(ticket);
+		
+		System.out.println(ticket.toString());
+		return ticket;
 	}
 
 	/*
@@ -82,5 +100,16 @@ public class Theater {
    */
 	public List<Ticket> getTransactionLog() {
 		return ticket_queue;
+	}
+	
+	public String getShow() {
+		return show;
+	}
+	
+	public boolean hasTickets() {
+		if(numSeatsAssigned != totalNumSeats)
+			return true;
+		else
+			return false;
 	}
 }

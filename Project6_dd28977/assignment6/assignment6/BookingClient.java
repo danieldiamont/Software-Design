@@ -7,20 +7,28 @@
  * Spring 2018
  */
 
-// Insert header here
 package assignment6;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.lang.Thread;
 
 public class BookingClient {
+	
+	HashMap<String,Integer> office;
+	Theater theater;
   /*
    * @param office maps box office id to number of customers in line
    * @param theater the theater where the show is playing
    */
   public BookingClient(Map<String, Integer> office, Theater theater) {
     // TODO: Implement this constructor
+	  
+	  this.office = (HashMap<String, Integer>) office;
+	  this.theater = theater;
   }
 
   /*
@@ -31,7 +39,19 @@ public class BookingClient {
    *         should have as many threads as there are box offices
    */
 	public List<Thread> simulate() {
-		return null;
-		//TODO: Implement this method
+		
+		Set<String> boxNames = office.keySet();
+		
+		//thread list
+		List<Thread> thread_list = new ArrayList<Thread>();
+		
+		//create a thread (box office) for each key in the set
+		for(String box : boxNames) {
+			Thread thread = new Thread(new BoxOffice(box, office.get(box),theater));
+			thread.start();
+			thread_list.add(thread);
+		}
+		
+		return thread_list;
 	}
 }
