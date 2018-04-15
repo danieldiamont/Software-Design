@@ -27,12 +27,13 @@ public class Theater {
 	private int totalNumSeats;
 	private String show;
 	
-	PriorityQueue<Seat> seat_queue;
-	List<Ticket> ticket_queue = new ArrayList<Ticket>();
+	private PriorityQueue<Seat> seat_queue;
+	private List<Ticket> ticket_queue = new ArrayList<Ticket>();
 	private int numSeatsAssigned;
 
 	/**
-	 * Constructor
+	 * Constructor for theater
+	 * 
 	 * @param numRows
 	 * @param seatsPerRow
 	 * @param show
@@ -55,8 +56,10 @@ public class Theater {
 			}
 		}
 		
+		//allocate a priority queue sorted by the seat comparator
 		seat_queue = new PriorityQueue<Seat>(totalNumSeats, new SeatComparator());
 		
+		//add all the seats to the priority queue
 		for(Seat seat : seat_list) {
 			seat_queue.add(seat);
 		}
@@ -84,12 +87,19 @@ public class Theater {
    * @return a ticket or null if a box office failed to reserve the seat
    */
 	public synchronized Ticket printTicket(String boxOfficeId, Seat seat, int client) {
+		
+		//create a ticket
 		Ticket ticket = new Ticket(show,boxOfficeId,seat,client);
 		
+		//increased the number of assigned seats in the theater
 		numSeatsAssigned = numSeatsAssigned + 1;
+		
+		//add ticket to the transaction log
 		ticket_queue.add(ticket);
 		
+		//print out ticket to console
 		System.out.println(ticket.toString());
+		
 		return ticket;
 	}
 
@@ -102,10 +112,10 @@ public class Theater {
 		return ticket_queue;
 	}
 	
-	public String getShow() {
-		return show;
-	}
-	
+	/**
+	 * 
+	 * @return true if the theater is not full; return false otherwise
+	 */
 	public boolean hasTickets() {
 		if(numSeatsAssigned != totalNumSeats)
 			return true;

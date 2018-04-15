@@ -1,5 +1,19 @@
+/* MULTITHREADING <Seat.java>
+ * EE422C Project 6 submission by
+ * <Daniel Diamont>
+ * <dd28977>
+ * <15455>
+ * Slip days used: <0>
+ * Spring 2018
+ */
+
 package assignment6;
 
+/**
+ * This class represents a single seat in the theater.
+ * @author Daniel Diamont
+ *
+ */
 public class Seat {
 	
 	private int rowNum;
@@ -10,6 +24,9 @@ public class Seat {
 		this.seatNum = seatNum;
 	}
 
+	/*
+	 * GETTERS AND SETTERS
+	 */
 	public int getSeatNum() {
 		return seatNum;
 	}
@@ -18,13 +35,39 @@ public class Seat {
 		return rowNum;
 	}
 
+	/**
+	 * toString method
+	 * 
+	 * @return string holds the converted rowNumber into alphabetized representation
+	 * 
+	 * e.g.:
+	 * 
+	 * 0  -> A
+	 * 26 -> AA
+	 * 27 -> AB
+	 * .
+	 * .
+	 * .
+	 * 
+	 */
 	@Override
 	public String toString() {
-		// TODO: Implement this method to return the full Seat location ex: A1
 		String string = new String();
-		
-		string += String.valueOf(Character.toChars(0x41 + this.rowNum)) + this.seatNum; //0x32 is ASCII offset to 'A'
+
+		string += rowString(this.rowNum) + this.seatNum; //0x41 is the ASCII offset to 'A'
 		return string;
+	}
+	
+	/*
+	 * Recursive helper function for toString method
+	 */
+	public String rowString(int num) {
+		if(num < 0) {
+			return "";
+		}
+		else {
+			return rowString((num / 26) - 1) + (char)(0x41 + num % 26);
+		}
 	}
 
 }

@@ -20,18 +20,18 @@ public class BookingClient {
 	
 	HashMap<String,Integer> office;
 	Theater theater;
-  /*
+	
+  /**
    * @param office maps box office id to number of customers in line
    * @param theater the theater where the show is playing
    */
   public BookingClient(Map<String, Integer> office, Theater theater) {
-    // TODO: Implement this constructor
 	  
 	  this.office = (HashMap<String, Integer>) office;
 	  this.theater = theater;
   }
 
-  /*
+  /**
    * Starts the box office simulation by creating (and starting) threads
    * for each box office to sell tickets for the given theater
    *
